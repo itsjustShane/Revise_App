@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 
 # My SQL Database connector
-def get_dp_connection():
+def get_db_connection():
     try:
         connection = mysql.connector.connect(
             host= "localhost",
@@ -30,7 +30,7 @@ def home():
 #Root to get all user
 @app.route('/api/users', methods = ['GET'])
 def get_users():
-    conn = get_dp_connection()
+    conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
 
@@ -48,21 +48,21 @@ def get_users():
 #Route to get a single user by ID
 @app.route('/api/users/<int:user_id', methods = ['GET'])
 def get_user(user_id):
-    conn = get_dp_connection()
+    conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
     
     cursor = conn.cursor(dictionary = True)
-    cursor.execute('SELECT * FROM users WHERE id = %s;' (user_id))
-    users = cursor.fetchone()
+    cursor.execute('SELECT * FROM users WHERE id = %s;', (user_id))
+    user = cursor.fetchone()
     cursor.close()
     conn.close()
 
-    if not users:
+    if not user:
         return jsonify({"message": "User not found"}), 404
     
     return jsonify(user), 200
-
+'''
 #Route to create a new user
 @app.route('/api/users', methods = ['POST'])
 def create_user():
@@ -75,7 +75,7 @@ def create_user():
     email = data['email']
     age = data['age']
 
-    conn = get_dp_connection()
+    conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
 
@@ -83,7 +83,7 @@ def create_user():
     try:
         cursor.execute(
             'INSERT INTO users (first_name, last_name, age)  VALUES (%s, %s, %s, %s)', 
-            (first_name, last_name, age)
+            (first_name, last_name, email, age)
         )
         conn.commit()
         user_id = cursor.lastrowid
@@ -94,7 +94,7 @@ def create_user():
         conn.close()
 
     return jsonify({"message":"User created successfully", "user_id": user_id}), 201
-
+'''
 #Route update user
 @app.route('/api/users/<int:user_id>', methods = ['PUT'])
 def update_user(user_id):
@@ -102,7 +102,7 @@ def update_user(user_id):
     if not data:
         return jsonify({"error": " No data provided"}),400
     
-    conn = get_dp_connection()
+    conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
 
@@ -110,7 +110,7 @@ def update_user(user_id):
 
     #Check if exists
     cursor.execute('SELECT * FROM users WHERE id = %s;' (user_id))
-    users = cursor.fetchone()
+    user = cursor.fetchone()
     if not user:
         return jsonify({"error": "User not found"}),404
 
@@ -137,7 +137,7 @@ def update_user(user_id):
 #Route delete user
 @app.route('/api/users/<int:user_id>', methods = ['DELETE'])
 def delete_user(user_id):
-    conn = get_dp_connection()
+    conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
 
@@ -150,8 +150,8 @@ def delete_user(user_id):
 
     try:
         cursor.execute('DELETE FROM users WHERE id = %s', (user_id))
-        connect.commit()
-    except mysql.connector.Error as errr:
+        conn.commit()
+    except mysql.connector.Error as err:
         return jsonify({"error": str(err)}), 500
     finally:
         cursor.close()
