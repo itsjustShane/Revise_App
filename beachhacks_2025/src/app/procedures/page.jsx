@@ -13,7 +13,7 @@ export default function Procedures() {
             <MultiStep />
         </div>
         
-        {/* Body Content */}
+        {/* Body Content - could be edited for dynamic content for future usability*/}
         <div className="body-container">
             <h2>C-Section Steps</h2>
             <h3>1. Preoperative Preparations</h3>

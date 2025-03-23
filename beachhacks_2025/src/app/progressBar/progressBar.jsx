@@ -27,7 +27,7 @@ function Multi() {
             else if (action === "prev") prevStep();
         });
 
-        return () => socket.off("progressAction"); // Cleanup on unmount
+        return () => socket.off("progressAction"); // Cleanup on unmount -- adjust for dynamic content
     }, []);
 
     return (
