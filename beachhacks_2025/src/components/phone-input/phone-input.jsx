@@ -22,12 +22,13 @@ const PhoneInput = () => {
     <div className="flex flex-col space-y-2">
       <input
         type="text"
+        required
         id="phone"
         name="phone"
         value={formatPhoneNumber(phoneNumber)}
         onChange={handleChange}
         placeholder="(123) 456-7890"
-        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 mb-4 focus:border-blue-900"
+        className="w-3/4 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 mb-4 ml-28 focus:border-blue-900"
         maxLength={14}
       />
     </div>
