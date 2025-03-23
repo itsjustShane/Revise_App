@@ -1,163 +1,35 @@
 # Flask API Script for reference 
 
-from flask import Flask, jsonify, request 
-from flask_cors import CORS
-import mysql.connector 
+from flask import Flask, jsonify, request, render_template
+import openai
+import os
+from dotenv import load_dotenv 
 
 app = Flask(__name__)
 
-#Enable CORS for all routes
-CORS(app)
+load_dotenv()
 
-# My SQL Database connector
-def get_db_connection():
-    try:
-        connection = mysql.connector.connect(
-            host= "localhost",
-            user = "root",
-            password = "121212",
-            database = "users_db"
-        )
-        return connection
-    except mysql.connector.Error as err: 
-        return None
+openai_client = openai.OpenAI(api_key=f"{os.getenv("OPENAI_API_KEY")}")
 
-#Root route
 @app.route('/')
 def home():
-    return jsonify({"message": "Welcome to user API"}), 200
+    return render_template('index.html')
 
-#Root to get all user
-@app.route('/api/users', methods = ['GET'])
-def get_users():
-    conn = get_db_connection()
-    if not conn:
-        return jsonify({"error": "Database connection failed"}), 500
-
-    cursor = conn.cursor(dictionary = True)
-    cursor.execute('SELECT * FROM users;')
-    users = cursor.fetchall()
-    cursor.close()
-    conn.close()
-
-    if not users:
-        return jsonify({"message": "No users found"}), 404
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_input = request.json.get("message")
+    if not user_input:
+        return jsonify({"error": "No input provided"}), 400
     
-    return jsonify(users), 200
-
-#Route to get a single user by ID
-@app.route('/api/users/<int:user_id', methods = ['GET'])
-def get_user(user_id):
-    conn = get_db_connection()
-    if not conn:
-        return jsonify({"error": "Database connection failed"}), 500
-    
-    cursor = conn.cursor(dictionary = True)
-    cursor.execute('SELECT * FROM users WHERE id = %s;', (user_id))
-    user = cursor.fetchone()
-    cursor.close()
-    conn.close()
-
-    if not user:
-        return jsonify({"message": "User not found"}), 404
-    
-    return jsonify(user), 200
-'''
-#Route to create a new user
-@app.route('/api/users', methods = ['POST'])
-def create_user():
-    data = request.get_json()
-    if not data or not all(key in data key in ["first_name", "last_name", "email", "age"]):
-        return jsonify({"error": "Missing required fields"}), 400
-
-    first_name = data['first_name']
-    last_name = data['last_name']
-    email = data['email']
-    age = data['age']
-
-    conn = get_db_connection()
-    if not conn:
-        return jsonify({"error": "Database connection failed"}), 500
-
-    cursor = conn.cursor()
     try:
-        cursor.execute(
-            'INSERT INTO users (first_name, last_name, age)  VALUES (%s, %s, %s, %s)', 
-            (first_name, last_name, email, age)
+        response = openai_client.chat.completions.create(
+            model="gpt-4o", 
+            messages=[{"role": "user", "content": user_input}]
         )
-        conn.commit()
-        user_id = cursor.lastrowid
-    except mysql.connector.Error as err:
-        return jsonify({"error": str(err)}), 500
-    finally:
-        cursor.close()
-        conn.close()
-
-    return jsonify({"message":"User created successfully", "user_id": user_id}), 201
-'''
-#Route update user
-@app.route('/api/users/<int:user_id>', methods = ['PUT'])
-def update_user(user_id):
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": " No data provided"}),400
-    
-    conn = get_db_connection()
-    if not conn:
-        return jsonify({"error": "Database connection failed"}), 500
-
-    cursor = conn.cursor(dictionary = True)
-
-    #Check if exists
-    cursor.execute('SELECT * FROM users WHERE id = %s;' (user_id))
-    user = cursor.fetchone()
-    if not user:
-        return jsonify({"error": "User not found"}),404
-
-    #update user fields
-    first_name = data.get('first_name', user['first_name'])
-    last_name = data.get('last_name', user['last_name'])
-    email = data.get('email', user['email'])
-    age = data.get('age', user['age'])
-
-    try:
-        cursor.execute(
-            'UPDATE users SET first_name = %s, last_name = %s, email = %s, age = %s, WHERE id = %s', 
-            (first_name, last_name, age, user_id)
-        )
-        conn.commit()
-    except mysql.connector.Error as err:
-        return jsonify({"error": "str(err)"}), 500
-    finally:
-        cursor.close()
-        conn.close()
-
-    return jsonify({"message":"User update successfully"}), 200
-       
-#Route delete user
-@app.route('/api/users/<int:user_id>', methods = ['DELETE'])
-def delete_user(user_id):
-    conn = get_db_connection()
-    if not conn:
-        return jsonify({"error": "Database connection failed"}), 500
-
-    cursor = conn.cursor()
-    
-    #Check if exists
-    cursor.execute('SELECT * FROM users WHERE id = %s;' (user_id))
-    if not cursor.fetchone():
-        return jsonify({"error": "User not found"}),404
-
-    try:
-        cursor.execute('DELETE FROM users WHERE id = %s', (user_id))
-        conn.commit()
-    except mysql.connector.Error as err:
-        return jsonify({"error": str(err)}), 500
-    finally:
-        cursor.close()
-        conn.close()
-    
-    return jsonify({"error": "User deleted successfully"}), 200
+        reply = response.choices[0].message.content if response.choices else "Error: No response received"
+        return jsonify({"response": reply})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__== '__main__':
     app.run(debug = True)
