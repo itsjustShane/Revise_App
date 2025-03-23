@@ -1,4 +1,92 @@
+* {
+    box-sizing: border-box; /* ✅ Fix invalid box-sizing */
+    padding: 0;
+    margin: 0;
+}
 
+.container {
+    width: 90vw; /* ✅ Make container responsive */
+    max-width: 600px; /* Prevent it from getting too wide */
+    background-color: var(--mediumBlue);
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: hidden;
+}
+
+.container .content {
+    font-size: 2rem;
+    color: var(--line-border-empty);
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* ✅ Make progress container adjust to window size */
+.progress_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 90vw; /* ✅ Responsive width */
+    min-width: 300px; /* Prevents shrinking too much */
+    padding: 20px 0;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 2;
+    position: relative;
+}
+
+.circle.active {
+    background-color: #1c3150;
+    color: white;
+}
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #1c3150;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* ✅ Responsive design: Adjust for smaller screens */
+@media (max-width: 500px) {
+    .progress_container {
+        max-width: 95vw; /* Make it even more fluid on smaller screens */
+    }
+
+    .circle {
+        width: 30px; /* Reduce circle size on small screens */
+        height: 30px;
+        font-size: 1.2rem;
+    }
+}
+
+
+/*
 * {
     box-sizing: 0;
     padding: 0;
@@ -13,7 +101,7 @@ body {
     background: #a6acaf;
     /*font-family:'Courier New', Courier, monospace;
 }
-*/
+
 .container {
     width: 400px;
     background-color: var(--mediumBlue);
@@ -39,7 +127,7 @@ body {
     width: 100%;
     padding: 20px 0;
 }
-
+/*
 .progress_container::before {
     content: "";
     position: absolute;
@@ -91,4 +179,4 @@ body {
 .btn:disabled {
     background-color: #aaa;
     cursor: not-allowed;
-}
+} */
