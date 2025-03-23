@@ -21,6 +21,7 @@ body {
     border-radius: 5px;
     overflow-x: hidden;
     padding-left: 5%;
+    padding-right: 5%;
 }
 
 .container .content{
@@ -33,10 +34,14 @@ body {
 .progress_container {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
+    align-items: center;
     position: relative;
+    width: 100%;
+    padding: 20px 0;
 }
 
+/* 🔥 REMOVE THIS (Progress Bar Line) */
+/*
 .progress_container::before {
     content: "";
     position: absolute;
@@ -45,72 +50,47 @@ body {
     width: 100%;
     top: 50%;
     left: 0;
-    z-index: 1001;
     transform: translateY(-50%);
+    z-index: 0;
 }
-
-.progress {
-    background-color: var(--line-border-fill);
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    height: 4px;
-    z-index: 1001;
-    transition: all 0.8s ease-in;
-}
+*/
 
 .circle {
-    width: 40px; /* Set a fixed width */
-    height: 40px; /* Set a fixed height */
-    border-radius: 50%; /* Make it a circle */
-    background-color: #ddd; /* Default background */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
     color: black;
-    display: flex; /* Center number inside */
+    display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    z-index: 1002;
+    z-index: 2;
+    position: relative;
 }
 
-.circle.active{
-    border-color: var(--line-border-fill);
-    color: #fff;
-    background-color: var(--navyBlue);
+.circle.active {
+    background-color: #1c3150;
+    color: white;
 }
 
 .btns {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
+    margin-top: 20px;
 }
 
 .btn {
-    outline: none;
+    padding: 10px 20px;
     border: none;
+    background-color: #1c3150;
+    color: white;
     cursor: pointer;
-    font-family: inherit;
-    border-radius: 4px;
-    background: 4px;
-    background-color: var(--navyBlue);
-    color: #fff;
-    padding: 4px 40px;
+    border-radius: 5px;
 }
 
-.btn.active {
-    outline: none;
-    transform: scale(0.98);
-}
-
-.disabled {
-    outline: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    border-radius: 4px;
-    color: #fff;
-    padding: 4px 40px;
-    color: var(--line-border-empty);
+.btn:disabled {
+    background-color: #aaa;
     cursor: not-allowed;
 }
