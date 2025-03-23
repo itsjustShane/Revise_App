@@ -9,6 +9,8 @@ app = Flask(__name__)
 #Enable CORS for all routes
 CORS(app)
 
+
+
 # My SQL Database connector
 def get_db_connection():
     try:
@@ -62,7 +64,7 @@ def get_user(user_id):
         return jsonify({"message": "User not found"}), 404
     
     return jsonify(user), 200
-'''
+
 #Route to create a new user
 @app.route('/api/users', methods = ['POST'])
 def create_user():
@@ -94,7 +96,7 @@ def create_user():
         conn.close()
 
     return jsonify({"message":"User created successfully", "user_id": user_id}), 201
-'''
+
 #Route update user
 @app.route('/api/users/<int:user_id>', methods = ['PUT'])
 def update_user(user_id):
@@ -161,7 +163,3 @@ def delete_user(user_id):
 
 if __name__== '__main__':
     app.run(debug = True)
-
-
-
-
