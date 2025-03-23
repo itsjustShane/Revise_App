@@ -4,7 +4,7 @@ export default function Procedures() {
     return (
       <div className="dashboard-container">
         {/* Header Container */}
-        <div className="header-container">
+        <div className="header-container"> 
             <h1>Progress</h1>
         </div>
         

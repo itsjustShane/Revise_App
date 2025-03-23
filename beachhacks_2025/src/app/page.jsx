@@ -16,7 +16,7 @@ export default function Home() {
           <Button text="Schedule Appointment" />
           <Link href="/procedures">
             <Button text="View Procedure" />
-          </Link>
+          </Link> 
         </div>
       </main>
     </div>
