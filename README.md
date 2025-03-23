@@ -6,3 +6,7 @@ Procedures are complicated for patients and their families to understand, especi
 
 # Idea
 Operation Relay tracks surgery procedure in real time for patient and patient’s family, as well as providing the workflow. Time stamps for important steps will be recorded for easy viewing. In the case of medical error, the patient’s family will immediately be alerted, and recovery steps will be provided for them to understand. 
+
+# Tech Stack
+## Frontend: Next.js, React, TailwindCSS
+## Backend: Python Flask
