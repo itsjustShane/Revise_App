@@ -15,7 +15,7 @@ function Multi() {
     const [step, setStep] = useState(1);
     const totalSteps = 3;
 
-    function handlePrev() {
+    function handlePrev() { // Might change these so they can be progressed remotely
         if (step > 1) setStep((step)=> step - 1);
     }
 

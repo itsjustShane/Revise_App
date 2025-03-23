@@ -1,5 +1,7 @@
 // import styles from "./page.css"; // Make sure this import path is correct
 import "./page.css";
+// import ProgressBar from "../progressBar/progressBar";
+import MultiStep from "../progressBar/progressBar";
 
 
 export default function Procedures() {
@@ -8,6 +10,7 @@ export default function Procedures() {
         {/* Header Container */}
         <div className="header-container"> 
             <h1>Progress</h1>
+            <MultiStep />
         </div>
         
         {/* Body Content */}

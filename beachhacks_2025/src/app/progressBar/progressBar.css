@@ -40,8 +40,6 @@ body {
     padding: 20px 0;
 }
 
-/* 🔥 REMOVE THIS (Progress Bar Line) */
-/*
 .progress_container::before {
     content: "";
     position: absolute;
