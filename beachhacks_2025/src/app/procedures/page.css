@@ -1,0 +1,61 @@
+/* Root color variables */
+
+/* Dashboard container that holds the header and body */
+.dashboard-container {
+    min-height: 100vh;  /* Ensure full height */
+    padding-top: 150px;  /* Push the body below the fixed header */
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+}
+
+/* Header container: fixed at the top */
+.header-container {
+    /*background-color: var(--mediumBlue) !important;*/
+    background: var(--mediumBlue) !important;
+    display: flex;
+    justify-content: flex-start;  /* Center content horizontally */
+    align-items: flex-start;      /* Center content vertically */
+    width: 100%;              /* Full width */
+    height: 150px;            /* Fixed height */
+    position: fixed;          /* Fix the header to the top */
+    top: 0;                   /* Position it at the top */
+    left: 0;                  /* Align to the left */
+    z-index: 1000;            /* Ensure it's above other content */
+    color: var(--background);             /* Ensure text is white */
+    border-bottom: 2px solid var(--navyBlue);  /* Optional: Add a bottom border */
+}
+
+/* Heading style inside the header */
+h1 {
+    margin: 0;  /* Remove default margin */
+    font-size: xx-large;
+    margin-top: 3%;
+    margin-left: 5%;
+}
+
+/* Body container style */
+.body-container {
+    background-color: var(--background);
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 3%;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* General body margin */
+body {
+    margin: 0; /* Remove default body margin */
+}
+
+h2 {
+    font-size: x-large;
+}
+
+/* Heading style for h3 */
+h3 {
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

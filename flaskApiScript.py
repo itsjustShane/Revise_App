@@ -1,11 +1,14 @@
 # Flask API Script for reference 
 
 from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 import openai
 import os
 from dotenv import load_dotenv 
 
 app = Flask(__name__)
+
+CORS(app)
 
 load_dotenv()
 
@@ -17,7 +20,7 @@ def home():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    user_input = request.json.get("message")
+    user_input = request.json.get("message") + " step by step procedure"
     if not user_input:
         return jsonify({"error": "No input provided"}), 400
     
@@ -33,7 +36,3 @@ def chat():
 
 if __name__== '__main__':
     app.run(debug = True)
-
-
-
-

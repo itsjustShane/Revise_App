@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operation Relay</title>
+    <title>ChatGPT Flask App</title>
     <script>
         async function sendMessage() {
             let userMessage = document.getElementById("userMessage").value;
             if (!userMessage) return;
-    
-            document.getElementById("chatbox").innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
-            document.getElementById("userMessage").value = "";
     
             let response = await fetch("/chat", {
                 method: "POST",
@@ -22,14 +19,15 @@
     
             let result = await response.json();
             let reply = result.response || result.error || "Error: No response from API";
-            document.getElementById("chatbox").innerHTML += `<p><strong>ChatGPT:</strong> ${reply}</p>`;
+            document.getElementById("chatbox").innerHTML += `<p>${reply}</p>`;
         }
     </script>
     
 </head>
 <body>
-    <div id="chatbox" style="padding:10px; height:300px; overflow-y:scroll;"></div>
-    <input type="text" id="userMessage" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
+    <h1>Enter patient procedure</h1>  
+    <input type="text" id="userMessage" placeholder="C-section...">
+    <button onclick="sendMessage()">Send</button> <br>
+    <div id="chatbox" style="border:1px solid #000; padding:10px; height:300px; overflow-y:scroll; margin-top: 10px;"></div>
 </body>
 </html>
