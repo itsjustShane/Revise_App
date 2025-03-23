@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
 import Button from "@/components/button/button";
 
 export default function Home() {
@@ -16,7 +15,9 @@ export default function Home() {
           <Link href="/appointment">
             <Button text="Schedule Appointment" ></Button>
           </Link>
-          <Button text="View Patient Status"></Button>
+          <Link href="/procedures">
+            <Button text="View Patient Status"></Button>
+          </Link>
         </div>
       </main>
     </div>
