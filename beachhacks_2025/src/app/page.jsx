@@ -12,6 +12,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center">
         <h1 className="text-8xl">Operation Relay</h1>
         <FontAwesomeIcon icon={faUserNurse} className="w-30 h-30" />
+        
         <div className="flex flex-row my-10 gap-10">
           <Button text="Schedule Appointment" />
           <Link href="/procedures">

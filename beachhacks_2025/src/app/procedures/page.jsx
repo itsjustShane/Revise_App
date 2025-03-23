@@ -1,4 +1,6 @@
-import "./page.css"; // Make sure this import path is correct
+// import styles from "./page.css"; // Make sure this import path is correct
+import "./page.css";
+
 
 export default function Procedures() {
     return (

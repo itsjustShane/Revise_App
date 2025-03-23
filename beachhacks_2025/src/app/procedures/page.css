@@ -1,15 +1,7 @@
 /* Root color variables */
-.root {
-    --background: #F2E9E4;
-    --mediumBlue: #78809D;
-    --mustyGrey: #aaa2b1;
-    --mutedBlue: #4d6489;
-    --navyBlue: #1c3150;
-}
 
 /* Dashboard container that holds the header and body */
 .dashboard-container {
-    background-color: var(--background);
     min-height: 100vh;  /* Ensure full height */
     padding-top: 150px;  /* Push the body below the fixed header */
     display: flex;
@@ -19,7 +11,8 @@
 
 /* Header container: fixed at the top */
 .header-container {
-    background-color: var(--mediumBlue);
+    /*background-color: var(--mediumBlue) !important;*/
+    background: var(--mediumBlue) !important;
     display: flex;
     justify-content: flex-start;  /* Center content horizontally */
     align-items: flex-start;      /* Center content vertically */
@@ -30,21 +23,23 @@
     left: 0;                  /* Align to the left */
     z-index: 1000;            /* Ensure it's above other content */
     color: var(--background);             /* Ensure text is white */
-    border-bottom: 2px solid black;  /* Optional: Add a bottom border */
+    border-bottom: 2px solid var(--navyBlue);  /* Optional: Add a bottom border */
 }
 
 /* Heading style inside the header */
 h1 {
     margin: 0;  /* Remove default margin */
     font-size: xx-large;
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: 5%;
 }
 
 /* Body container style */
 .body-container {
+    background-color: var(--background);
     padding-left: 5%;
     padding-right: 5%;
+    padding-top: 3%;
     flex-direction: column;
     display: flex;
     justify-content: flex-start;
@@ -53,6 +48,10 @@ h1 {
 /* General body margin */
 body {
     margin: 0; /* Remove default body margin */
+}
+
+h2 {
+    font-size: x-large;
 }
 
 /* Heading style for h3 */
