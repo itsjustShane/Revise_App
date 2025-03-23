@@ -1,0 +1,116 @@
+
+* {
+    box-sizing: 0;
+    padding: 0;
+    margin: 0;
+}
+/*
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    background: #a6acaf;
+    /*font-family:'Courier New', Courier, monospace;
+}
+*/
+.container {
+    width: 400px;
+    background-color: var(--mediumBlue);
+    padding: 1rem 2 rem;
+    border-radius: 5px;
+    overflow-x: hidden;
+    padding-left: 5%;
+}
+
+.container .content{
+    font-size: 2rem;
+    color: var(--line-border-empty);
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.progress_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.progress_container::before {
+    content: "";
+    position: absolute;
+    background-color: #ddd;
+    height: 4px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    z-index: 1001;
+    transform: translateY(-50%);
+}
+
+.progress {
+    background-color: var(--line-border-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    z-index: 1001;
+    transition: all 0.8s ease-in;
+}
+
+.circle {
+    width: 40px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
+    border-radius: 50%; /* Make it a circle */
+    background-color: #ddd; /* Default background */
+    color: black;
+    display: flex; /* Center number inside */
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 1002;
+}
+
+.circle.active{
+    border-color: var(--line-border-fill);
+    color: #fff;
+    background-color: var(--navyBlue);
+}
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 4px;
+    background: 4px;
+    background-color: var(--navyBlue);
+    color: #fff;
+    padding: 4px 40px;
+}
+
+.btn.active {
+    outline: none;
+    transform: scale(0.98);
+}
+
+.disabled {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 4px;
+    color: #fff;
+    padding: 4px 40px;
+    color: var(--line-border-empty);
+    cursor: not-allowed;
+}
